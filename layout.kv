@@ -1,0 +1,42 @@
+ScreenManager:
+    MenuScreen:
+    WordsScreen:
+    IrregularVerbsScreen:
+<MenuScreen>:
+    name: 'menu'
+    MDRectangleFlatButton:
+        text: 'Learn words'
+        pos_hint: {'center_x':0.5,'center_y':0.6}
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'learnWords'
+    MDRectangleFlatButton:
+        text: 'Learn irregular verbs'
+        pos_hint: {'center_x':0.5,'center_y':0.5}
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'irregularV'
+
+<WordsScreen>:
+    name: 'learnWords'
+    MDLabel:
+        text: 'Learn words'
+        halign: 'center'
+    MDRectangleFlatButton:
+        text: 'Back'
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'menu'
+
+<IrregularVerbsScreen>:
+    name: 'irregularV'
+    MDLabel:
+        text: 'Learn irregular verbs'
+        halign: 'center'
+    MDRectangleFlatButton:
+        text: 'Back'
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'menu'
