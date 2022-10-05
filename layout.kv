@@ -3,9 +3,9 @@ ScreenManager:
     WordsScreen:
     IrregularVerbsScreen:
 <MenuScreen>:
-    name: 'menu'
+    name: root.name
     MDRectangleFlatButton:
-        text: 'Learn words'
+        text: root.button_name
         pos_hint: {'center_x':0.5,'center_y':0.6}
         on_press:
             root.manager.transition.direction = 'left'
@@ -19,10 +19,10 @@ ScreenManager:
 
 <WordsScreen>:
     MDLabel:
-        text: 'Word to translate'
+        text: root.label_text
         font_style: "H3"
         halign: 'justify'
-        pos_hint: {'center_x': 0.65, 'center_y': 0.75}
+        pos_hint: {'center_x': 0.75, 'center_y': 0.75}
 
     MDFillRoundFlatIconButton:
         text: ' '
@@ -33,31 +33,31 @@ ScreenManager:
             root.manager.current = 'menu'
 
     MDRectangleFlatButton:
-        text: 'Translate variation 1'
+        text: root.choice_button1_text
         font_style: "H6"
         pos_hint: {'center_x':0.25,'center_y':0.50}
         size_hint: 0.4, 0.2
         on_press:
 
     MDRectangleFlatButton:
-        text: 'Translate variation 2'
+        text: root.choice_button2_text
         font_style: "H6"
         pos_hint: {'center_x':0.25,'center_y':0.20}
         size_hint: 0.4, 0.2
         on_press:
 
     MDRectangleFlatButton:
-        text: 'Translate variation 3'
+        text: root.choice_button3_text
         font_style: "H6"
         pos_hint: {'center_x':0.75,'center_y':0.50}
         size_hint: 0.4, 0.2
         on_press:
 
     MDRectangleFlatButton:
-        text: 'Translate variation 4'
+        text: root.choice_button4_text
         font_style: "H6"
         pos_hint: {'center_x':0.75,'center_y':0.20}
-        size_hint: 0.3, 0.2
+        size_hint: 0.4, 0.2
         on_press:
 
 
