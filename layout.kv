@@ -1,7 +1,7 @@
 ScreenManager:
     MenuScreen:
     WordsScreen:
-    IrregularVerbsScreen:
+    WordsScreen2:
 <MenuScreen>:
     name: root.name
     MDRectangleFlatButton:
@@ -20,67 +20,63 @@ ScreenManager:
 <WordsScreen>:
     MDLabel:
         text: root.label_text
+        id: lbl0
         font_style: "H3"
         halign: 'center'
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+
+    MDLabel:
+        text: root.label2_text
+        id: lbl1
+        font_style: "H3"
+        halign: 'center'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
 
     MDFillRoundFlatIconButton:
         text: ' '
         icon: "keyboard-backspace"
         pos_hint: {'center_x':0.1,'center_y':0.95}
-        on_press:
+        on_release:
             root.manager.transition.direction = 'right'
             root.manager.current = 'menu'
 
     MDRectangleFlatButton:
         text: root.choice_button1_text
-        id: 0
+        id: btn0
         font_style: "H6"
         pos_hint: {'center_x':0.25,'center_y':0.50}
         size_hint: 0.4, 0.2
-        on_press:
+        on_release:
             root.is_correct_answer(self)
-            root.manager.current = 'learnWords'
 
     MDRectangleFlatButton:
         text: root.choice_button2_text
-        id: 1
+        id: btn1
         font_style: "H6"
         pos_hint: {'center_x':0.25,'center_y':0.20}
         size_hint: 0.4, 0.2
-        on_press:
+        on_release:
             root.is_correct_answer(self)
-            root.manager.current = 'learnWords'
 
     MDRectangleFlatButton:
         text: root.choice_button3_text
-        id: 2
+        id: btn2
         font_style: "H6"
         pos_hint: {'center_x':0.75,'center_y':0.50}
         size_hint: 0.4, 0.2
-        on_press:
+        on_release:
             root.is_correct_answer(self)
-            root.manager.current = 'learnWords'
 
     MDRectangleFlatButton:
         text: root.choice_button4_text
-        id: 3
+        id: btn3
         font_style: "H6"
         pos_hint: {'center_x':0.75,'center_y':0.20}
         size_hint: 0.4, 0.2
-        on_press:
+        on_release:
             root.is_correct_answer(self)
-            root.manager.current = 'learnWords'
 
 
-<IrregularVerbsScreen>:
-    name: 'irregularV'
-    MDLabel:
-        text: 'Learn irregular verbs'
-        halign: 'center'
-    MDRectangleFlatButton:
-        text: 'Back'
-        pos_hint: {'center_x':0.5,'center_y':0.1}
-        on_press:
-            root.manager.transition.direction = 'right'
-            root.manager.current = 'menu'
+
+<WordsScreen2>
+
