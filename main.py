@@ -8,18 +8,13 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 import json
 
 from kivy.core.window import Window
-from kivymd.utils.asynckivy import sleep
 
 Window.size = (480, 800)
 
-x = {
-    "see": ["бачити"],
-    "hear": ["чути"],
-    "touch": ["торкатися"],
-    "smell": ["нюхати"]
-}
 
-Json_example = json.dumps(x)
+with open('words.json', 'r') as openfile:
+    json_words = json.load(openfile)
+
 
 translator = Translator()
 
@@ -39,12 +34,11 @@ class MenuScreen(Screen):
 class WordsScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.clear_widgets()
         self.name = 'learnWords'
         self.label2_text = self.name
         self.is_answer_chosen = False
 
-        self.words_list = random.sample(list(x.keys()), k=4)
+        self.words_list = random.sample(list(json_words), k=4)
 
         self.choice_button1_text = self.words_list[0]
         self.choice_button2_text = self.words_list[1]
@@ -53,11 +47,15 @@ class WordsScreen(Screen):
 
         self.correct_word = random.choice(self.words_list)
 
-        self.label_text = translator.translate(self.correct_word, dest="uk").text
+        self.label_text = json_words[self.correct_word]
 
-    # def on_touch_up(self, touch):
-    #     if self.is_answer_chosen:
-    #         self.move_to_next_screen()
+    def on_touch_move(self, touch):
+        if self.is_answer_chosen:
+            if touch.dx < 0:
+                self.move_to_next_screen()
+            elif touch.dx > 0:
+                self.manager.transition.direction = 'right'
+                self.manager.current = 'menu'
 
     def is_correct_answer(self, instance):
         if instance.text == self.correct_word:
@@ -69,16 +67,15 @@ class WordsScreen(Screen):
             self.ids['btn' + str(self.words_list.index(self.correct_word))].text_color = 'green'
             self.ids['btn' + str(self.words_list.index(self.correct_word))].line_color = 'green'
         self.is_answer_chosen = True
-        self.manager.get_screen('learnWords2').refresh()
-        Clock.schedule_once(self.move_to_next_screen, 2)
 
     def move_to_next_screen(self, *args):
+        self.manager.get_screen('learnWords2').refresh()
         self.manager.transition.direction = 'left'
         self.manager.current = 'learnWords2'
 
     def refresh(self):
         self.is_answer_chosen = False
-        self.words_list = random.sample(list(x.keys()), k=4)
+        self.words_list = random.sample(list(json_words), k=4)
 
         for i in range(4):
             self.ids['btn' + str(i)].text = self.words_list[i]
@@ -86,7 +83,7 @@ class WordsScreen(Screen):
             self.ids['btn' + str(i)].line_color = 'orange'
 
         self.correct_word = random.choice(self.words_list)
-        self.ids['lbl0'].text = translator.translate(self.correct_word, dest="uk").text
+        self.ids['lbl0'].text = json_words[self.correct_word]
 
 
 class WordsScreen2(WordsScreen):
@@ -96,25 +93,8 @@ class WordsScreen2(WordsScreen):
         self.name = 'learnWords2'
         self.label2_text = self.name
 
-    # def on_touch_up(self, touch):
-    #     if self.is_answer_chosen:
-    #         self.move_to_next_screen()
-    def is_correct_answer(self, instance):
-        if instance.text == self.correct_word:
-            instance.text_color = 'green'
-            instance.line_color = 'green'
-        else:
-            instance.text_color = 'red'
-            instance.line_color = 'red'
-            self.ids['btn' + str(self.words_list.index(self.correct_word))].text_color = 'green'
-            self.ids['btn' + str(self.words_list.index(self.correct_word))].line_color = 'green'
-
-        self.is_answer_chosen = True
-        self.manager.get_screen('learnWords').refresh()
-        Clock.schedule_once(self.move_to_next_screen, 2)
-        # self.move_to_next_screen()
-
     def move_to_next_screen(self, *args):
+        self.manager.get_screen('learnWords').refresh()
         self.manager.transition.direction = 'left'
         self.manager.current = 'learnWords'
 
