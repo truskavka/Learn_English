@@ -2,20 +2,39 @@ ScreenManager:
     MenuScreen:
     WordsScreen:
     WordsScreen2:
+    AddWords:
+    DeleteWords:
+    BaseScreen:
+
+<BaseScreen>:
+    MDFillRoundFlatIconButton:
+        text: ' '
+        icon: "keyboard-backspace"
+        pos_hint: {'center_x':0.1,'center_y':0.95}
+        on_release:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'menu'
+
 <MenuScreen>:
     name: root.name
     MDRectangleFlatButton:
-        text: root.button_name
+        text: root.button1_name
         pos_hint: {'center_x':0.5,'center_y':0.6}
         on_press:
             root.manager.transition.direction = 'left'
             root.manager.current = 'learnWords'
     MDRectangleFlatButton:
-        text: 'Learn irregular verbs'
+        text: root.button2_name
         pos_hint: {'center_x':0.5,'center_y':0.5}
         on_press:
             root.manager.transition.direction = 'left'
-            root.manager.current = 'irregularV'
+            root.manager.current = 'addWords'
+    MDRectangleFlatButton:
+        text: root.button3_name
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'delWords'
 
 <WordsScreen>:
     MDLabel:
@@ -25,20 +44,7 @@ ScreenManager:
         halign: 'center'
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
 
-    MDLabel:
-        text: root.label2_text
-        id: lbl1
-        font_style: "H3"
-        halign: 'center'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
 
-    MDFillRoundFlatIconButton:
-        text: ' '
-        icon: "keyboard-backspace"
-        pos_hint: {'center_x':0.1,'center_y':0.95}
-        on_release:
-            root.manager.transition.direction = 'right'
-            root.manager.current = 'menu'
 
     MDRectangleFlatButton:
         text: root.choice_button1_text
@@ -76,7 +82,54 @@ ScreenManager:
         on_release:
             root.is_correct_answer(self)
 
-
-
 <WordsScreen2>
 
+<AddWords>:
+    MDTextField:
+        id: txt0
+        hint_text: "Enter word you want to add"
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "Enter text"
+        pos_hint: {'center_x':0.5,'center_y':0.80}
+        size_hint: 0.8, None
+
+    MDTextField:
+        id: txt1
+        hint_text: "Enter translation"
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "Enter text"
+        pos_hint: {'center_x':0.5,'center_y':0.65}
+        size_hint: 0.8, None
+
+    MDRectangleFlatButton:
+        text: "Add word"
+        id: btn0
+        pos_hint: {'center_x':0.5,'center_y':0.30}
+        size_hint: 0.8, None
+        on_release: root.add_word_to_dict()
+
+<DeleteWords>:
+    MDTextField:
+        id: txt0
+        hint_text: "Enter word you want to delete"
+        required: True
+        helper_text_mode: "on_error"
+        helper_text: "Enter text"
+        pos_hint: {'center_x':0.5,'center_y':0.80}
+        size_hint: 0.8, None
+
+    MDRectangleFlatButton:
+        text: "Delete word"
+        id: btn0
+        pos_hint: {'center_x':0.5,'center_y':0.30}
+        size_hint: 0.8, None
+        on_release: root.delete_word()
+
+    MDRectangleFlatButton:
+        text: "Delete all words"
+        id: btn0
+        pos_hint: {'center_x':0.5,'center_y':0.2}
+        size_hint: 0.8, None
+        on_release: root.delete_all_words()
