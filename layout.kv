@@ -7,9 +7,10 @@ ScreenManager:
     BaseScreen:
 
 <BaseScreen>:
-    MDFillRoundFlatIconButton:
-        text: ' '
+    MDIconButton:
         icon: "keyboard-backspace"
+        theme_icon_color: "Custom"
+        icon_color: app.theme_cls.primary_color
         pos_hint: {'center_x':0.1,'center_y':0.95}
         on_release:
             root.manager.transition.direction = 'right'
@@ -21,6 +22,7 @@ ScreenManager:
         text: root.button1_name
         pos_hint: {'center_x':0.5,'center_y':0.6}
         on_press:
+            root.refresh_words_screen()
             root.manager.transition.direction = 'left'
             root.manager.current = 'learnWords'
     MDRectangleFlatButton:
@@ -43,8 +45,6 @@ ScreenManager:
         font_style: "H3"
         halign: 'center'
         pos_hint: {'center_x': 0.5, 'center_y': 0.75}
-
-
 
     MDRectangleFlatButton:
         text: root.choice_button1_text

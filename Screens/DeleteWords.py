@@ -16,7 +16,10 @@ class DeleteWords(BaseScreen):
         if Words.delete_word(word_to_delete=self.word) == -1:
             self.ids.txt0.hint_text = 'Such words is not in dictionary'
             self.ids.txt0.text = ''
+        else:
+            self.ids.txt0.hint_text = f'Word "{self.word}" was deleted'
+            self.ids.txt0.text = ''
 
-    @staticmethod
-    def delete_all_words():
+    def delete_all_words(self):
         Words.clear_dict()
+        self.ids.txt0.hint_text = 'All words were deleted from dictionary'

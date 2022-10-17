@@ -12,6 +12,9 @@ class WordsScreen(BaseScreen):
         self.is_answer_chosen = False
 
         self.words_list = Words.get_random_words(quantity=4)
+        if not self.words_list:
+            self.empty_dict_message_init()
+            return
 
         self.choice_button1_text = self.words_list[0]
         self.choice_button2_text = self.words_list[1]
@@ -30,15 +33,16 @@ class WordsScreen(BaseScreen):
                 self.move_to_next_screen()
 
     def is_correct_answer(self, instance):
-        if instance.text == self.correct_word:
-            instance.text_color = 'green'
-            instance.line_color = 'green'
-        else:
-            instance.text_color = 'red'
-            instance.line_color = 'red'
-            self.ids['btn' + str(self.words_list.index(self.correct_word))].text_color = 'green'
-            self.ids['btn' + str(self.words_list.index(self.correct_word))].line_color = 'green'
-        self.is_answer_chosen = True
+        if len(self.words_list) != 0:
+            if instance.text == self.correct_word:
+                instance.text_color = 'green'
+                instance.line_color = 'green'
+            else:
+                instance.text_color = 'red'
+                instance.line_color = 'red'
+                self.ids['btn' + str(self.words_list.index(self.correct_word))].text_color = 'green'
+                self.ids['btn' + str(self.words_list.index(self.correct_word))].line_color = 'green'
+            self.is_answer_chosen = True
 
     def move_to_next_screen(self, *args):
         self.manager.get_screen('learnWords2').refresh()
@@ -48,6 +52,9 @@ class WordsScreen(BaseScreen):
     def refresh(self):
         self.is_answer_chosen = False
         self.words_list = Words.get_random_words(quantity=4)
+        if not self.words_list:
+            self.empty_dict_message()
+            return
 
         for i in range(4):
             self.ids['btn' + str(i)].text = self.words_list[i]
@@ -55,7 +62,21 @@ class WordsScreen(BaseScreen):
             self.ids['btn' + str(i)].line_color = 'orange'
 
         self.correct_word = random.choice(self.words_list)
-        self.ids['lbl0'].text = Words.get_translation(self.correct_word)
+        self.ids.lbl0.text = Words.get_translation(self.correct_word)
+
+    def empty_dict_message_init(self):
+        self.label_text = 'Dictionary has got not enough words'
+        self.choice_button1_text = ''
+        self.choice_button2_text = ''
+        self.choice_button3_text = ''
+        self.choice_button4_text = ''
+
+    def empty_dict_message(self):
+        self.ids.lbl0.text = 'Dictionary has got not enough words'
+        for i in range(4):
+            self.ids['btn' + str(i)].text = ''
+            self.ids['btn' + str(i)].text_color = 'orange'
+            self.ids['btn' + str(i)].line_color = 'orange'
 
 
 class WordsScreen2(WordsScreen):

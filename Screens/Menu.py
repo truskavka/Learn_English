@@ -2,7 +2,12 @@ from kivy.uix.screenmanager import Screen
 
 
 class MenuScreen(Screen):
-    name = 'menu'
-    button1_name = 'Learn words'
-    button2_name = 'Add words'
-    button3_name = 'Delete words'
+    def __init__(self, **kw):
+        super(MenuScreen, self).__init__(**kw)
+        self.name = 'menu'
+        self.button1_name = 'Learn words'
+        self.button2_name = 'Add words'
+        self.button3_name = 'Delete words'
+
+    def refresh_words_screen(self):
+        self.manager.get_screen('learnWords').refresh()
