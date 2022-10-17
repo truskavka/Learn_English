@@ -1,7 +1,6 @@
-import random
-
 from Screens.BaseScreen import BaseScreen
 from db.words import Words
+import random
 
 Words = Words()
 

@@ -1,5 +1,7 @@
 from Screens.BaseScreen import BaseScreen
-from .LearnWords import Words
+from db import words
+
+Words = words.Words()
 
 
 class DeleteWords(BaseScreen):

@@ -3,6 +3,18 @@ from pathlib import Path
 from random import sample
 
 
+def singleton(class_):
+    """"simple decorator to realize singleton pattern"""
+    instances = {}
+
+    def getinstance(*args, **kwargs):
+        if class_ not in instances:
+            instances[class_] = class_(*args, **kwargs)
+        return instances[class_]
+    return getinstance
+
+
+@singleton
 class Words:
     json_words: dict
 
