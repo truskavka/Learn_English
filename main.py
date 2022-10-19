@@ -1,10 +1,7 @@
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
-from kivy.core.window import Window
 
 from Screens import Manager, Menu, LearnWords
-
-Window.size = (480, 800)
 
 
 class DemoApp(MDApp):
