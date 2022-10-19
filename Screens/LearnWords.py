@@ -1,3 +1,6 @@
+from kivy.animation import Animation
+from kivy.clock import Clock
+
 from Screens.BaseScreen import BaseScreen
 from db.words import Words
 import random
@@ -9,6 +12,7 @@ class WordsScreen(BaseScreen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.name = 'learnWords'
+        self.animation = Animation()
         self.is_answer_chosen = False
 
         self.words_list = Words.get_random_words(quantity=4)
@@ -29,7 +33,7 @@ class WordsScreen(BaseScreen):
         super().on_touch_move(touch)
         if self.is_answer_chosen:
             # in case of right to left slide next test will be displayed
-            if touch.dx < 0:
+            if touch.dx < -10:
                 self.move_to_next_screen()
 
     def is_correct_answer(self, instance):
@@ -43,14 +47,25 @@ class WordsScreen(BaseScreen):
                 self.ids['btn' + str(self.words_list.index(self.correct_word))].text_color = 'green'
                 self.ids['btn' + str(self.words_list.index(self.correct_word))].line_color = 'green'
             self.is_answer_chosen = True
+            Clock.schedule_once(self.show_hint, 3)
 
     def move_to_next_screen(self, *args):
         self.manager.get_screen('learnWords2').refresh()
         self.manager.transition.direction = 'left'
         self.manager.current = 'learnWords2'
 
+    def show_hint(self, *args):
+        self.animation = Animation(opacity=1, duration=2)
+        self.animation += Animation(opacity=0, duration=2)
+        self.animation.repeat = True
+
+        self.animation.start(self.ids.lbl1)
+
     def refresh(self):
         self.is_answer_chosen = False
+        self.ids.lbl1.opacity = 0
+        self.animation.stop(self.ids.lbl1)
+
         self.words_list = Words.get_random_words(quantity=4)
         if not self.words_list:
             self.empty_dict_message()

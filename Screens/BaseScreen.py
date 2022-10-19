@@ -7,6 +7,6 @@ class BaseScreen(Screen):
 
     def on_touch_move(self, touch):
         # in case of left to right slide Menu screen will be displayed
-        if touch.dx > 0:
+        if touch.dx > 10:
             self.manager.transition.direction = 'right'
             self.manager.current = 'menu'
