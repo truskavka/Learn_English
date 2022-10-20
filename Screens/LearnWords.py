@@ -55,8 +55,8 @@ class WordsScreen(BaseScreen):
         self.manager.current = 'learnWords2'
 
     def show_hint(self, *args):
-        self.animation = Animation(opacity=1, duration=2)
-        self.animation += Animation(opacity=0, duration=2)
+        self.animation = Animation(opacity=0.5, duration=1.75)
+        self.animation += Animation(opacity=0, duration=1.75)
         self.animation.repeat = True
 
         self.animation.start(self.ids.lbl1)
