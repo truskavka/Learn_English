@@ -21,6 +21,7 @@ ScreenManager:
     MDRectangleFlatButton:
         text: root.button1_name
         pos_hint: {'center_x':0.5,'center_y':0.6}
+        size_hint: 0.2, None
         on_press:
             root.refresh_words_screen()
             root.manager.transition.direction = 'left'
@@ -28,12 +29,14 @@ ScreenManager:
     MDRectangleFlatButton:
         text: root.button2_name
         pos_hint: {'center_x':0.5,'center_y':0.5}
+        size_hint: 0.2, None
         on_press:
             root.manager.transition.direction = 'left'
             root.manager.current = 'addWords'
     MDRectangleFlatButton:
         text: root.button3_name
         pos_hint: {'center_x':0.5,'center_y':0.4}
+        size_hint: 0.2, None
         on_press:
             root.manager.transition.direction = 'left'
             root.manager.current = 'delWords'
