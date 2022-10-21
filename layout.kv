@@ -21,7 +21,7 @@ ScreenManager:
     MDRectangleFlatButton:
         text: root.button1_name
         pos_hint: {'center_x':0.5,'center_y':0.6}
-        size_hint: 0.2, None
+        size_hint: 0.3, None
         on_press:
             root.refresh_words_screen()
             root.manager.transition.direction = 'left'
@@ -29,14 +29,14 @@ ScreenManager:
     MDRectangleFlatButton:
         text: root.button2_name
         pos_hint: {'center_x':0.5,'center_y':0.5}
-        size_hint: 0.2, None
+        size_hint: 0.3, None
         on_press:
             root.manager.transition.direction = 'left'
             root.manager.current = 'addWords'
     MDRectangleFlatButton:
         text: root.button3_name
         pos_hint: {'center_x':0.5,'center_y':0.4}
-        size_hint: 0.2, None
+        size_hint: 0.3, None
         on_press:
             root.manager.transition.direction = 'left'
             root.manager.current = 'delWords'
@@ -61,7 +61,7 @@ ScreenManager:
         text: root.choice_button1_text
         id: btn0
         font_style: "H6"
-        pos_hint: {'center_x':0.25,'center_y':0.50}
+        pos_hint: {'center_x':0.25,'center_y':0.45}
         size_hint: 0.4, 0.2
         on_release:
             root.is_correct_answer(self)
@@ -70,7 +70,7 @@ ScreenManager:
         text: root.choice_button2_text
         id: btn1
         font_style: "H6"
-        pos_hint: {'center_x':0.25,'center_y':0.20}
+        pos_hint: {'center_x':0.25,'center_y':0.15}
         size_hint: 0.4, 0.2
         on_release:
             root.is_correct_answer(self)
@@ -79,7 +79,7 @@ ScreenManager:
         text: root.choice_button3_text
         id: btn2
         font_style: "H6"
-        pos_hint: {'center_x':0.75,'center_y':0.50}
+        pos_hint: {'center_x':0.75,'center_y':0.45}
         size_hint: 0.4, 0.2
         on_release:
             root.is_correct_answer(self)
@@ -88,7 +88,7 @@ ScreenManager:
         text: root.choice_button4_text
         id: btn3
         font_style: "H6"
-        pos_hint: {'center_x':0.75,'center_y':0.20}
+        pos_hint: {'center_x':0.75,'center_y':0.15}
         size_hint: 0.4, 0.2
         on_release:
             root.is_correct_answer(self)
