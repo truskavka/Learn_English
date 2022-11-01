@@ -12,7 +12,8 @@ class WordsScreen(BaseScreen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.name = 'learnWords'
-        self.animation = Animation()
+        self.animation = Animation(opacity=0.5, duration=1.75) + Animation(opacity=0, duration=1.75)
+        self.animation.repeat = True
         self.is_answer_chosen = False
 
         self.words_list = Words.get_random_words(quantity=4)
@@ -55,16 +56,13 @@ class WordsScreen(BaseScreen):
         self.manager.current = 'learnWords2'
 
     def show_hint(self, *args):
-        self.animation = Animation(opacity=0.5, duration=1.75)
-        self.animation += Animation(opacity=0, duration=1.75)
-        self.animation.repeat = True
-
-        self.animation.start(self.ids.lbl1)
+        if self.is_answer_chosen:
+            self.animation.start(self.ids.lbl1)
 
     def refresh(self):
         self.is_answer_chosen = False
         self.ids.lbl1.opacity = 0
-        self.animation.stop(self.ids.lbl1)
+        self.animation.cancel_all(self.ids.lbl1)
 
         self.words_list = Words.get_random_words(quantity=4)
         if not self.words_list:
