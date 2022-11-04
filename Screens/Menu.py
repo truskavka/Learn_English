@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 
 
 class MenuScreen(Screen):
+    """"simple menu to choose one of three other screens"""
     def __init__(self, **kw):
         super(MenuScreen, self).__init__(**kw)
         self.name = 'menu'

@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 
 
 class BaseScreen(Screen):
+    """"abstract class for simple screen that has only move to menu button"""
     def __init__(self, **kw):
         super().__init__(**kw)
 

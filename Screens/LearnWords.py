@@ -12,6 +12,8 @@ class WordsScreen(BaseScreen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.name = 'learnWords'
+
+        # creating animation for hint
         self.animation = Animation(opacity=0.5, duration=1.75) + Animation(opacity=0, duration=1.75)
         self.animation.repeat = True
         self.is_answer_chosen = False
@@ -56,6 +58,7 @@ class WordsScreen(BaseScreen):
         self.manager.current = 'learnWords2'
 
     def show_hint(self, *args):
+        """"shows hint so user could move to next test"""
         if self.is_answer_chosen:
             self.animation.start(self.ids.lbl1)
 
@@ -78,6 +81,7 @@ class WordsScreen(BaseScreen):
         self.ids.lbl0.text = Words.get_translation(self.correct_word)
 
     def empty_dict_message_init(self):
+        # is needed because label`s ids are added after class object is created
         self.label_text = 'Dictionary has got not enough words'
         self.choice_button1_text = ''
         self.choice_button2_text = ''

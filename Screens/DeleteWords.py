@@ -11,6 +11,7 @@ class DeleteWords(BaseScreen):
         self.word = str()
 
     def delete_word(self):
+        # gets word from label
         self.word = self.ids.txt0.text
 
         if Words.delete_word(word_to_delete=self.word) == -1:
