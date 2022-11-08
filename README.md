@@ -1,2 +1,2 @@
 # Learn_English
-Android app that will help you to learn english words and iiregular verbs
+Android app that will help you to learn english words
